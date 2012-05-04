@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<serviceGroup>
+	<service name="TMPService">
+		<description></description>
+		<parameter name="ServiceClass">com.intalio.bpms.taskmanager.TMP</parameter>
+		<parameter name="LoadOnStartup">true</parameter>
+		<parameter name="useOriginalwsdl">true</parameter>
+		<parameter name="modifyUserWSDLPortAddress">true</parameter>        
+		<operation name="nextTaskReady" mep="http://www.w3.org/ns/wsdl/in-only" namespace="http://www.intalio.com/bpms/workflow/ib4p_20051115">
+            <messageReceiver class="org.apache.axis2.receivers.RawXMLINOnlyMessageReceiver"/>
+            <actionMapping>nextTaskReady</actionMapping>
+        </operation>       
+	</service>
+
+	<!-- <service name="UIFWService">
+		<description></description>
+		<parameter name="ServiceClass">com.intalio.bpms.tmpservice.UIFWServiceSkeleton</parameter>
+		<parameter name="LoadOnStartup">true</parameter>
+		<parameter name="useOriginalwsdl">true</parameter>
+		<operation name="claimTask">
+            <messageReceiver class="org.apache.axis2.receivers.RawXMLINOutMessageReceiver"/>
+            <actionMapping>http://www.intalio.com/bpms/workflow/ib4p_20051115/claimTask</actionMapping>
+        </operation>
+        <operation name="completeTask">
+            <messageReceiver class="org.apache.axis2.receivers.RawXMLINOutMessageReceiver"/>
+            <actionMapping>http://www.intalio.com/bpms/workflow/ib4p_20051115/completeTask</actionMapping>
+        </operation>
+        <operation name="revokeTask">
+            <messageReceiver class="org.apache.axis2.receivers.RawXMLINOutMessageReceiver"/>
+            <actionMapping>http://www.intalio.com/bpms/workflow/ib4p_20051115/revokeTask</actionMapping>
+        </operation>
+        <operation name="skipTask">
+            <messageReceiver class="org.apache.axis2.receivers.RawXMLINOutMessageReceiver"/>
+            <actionMapping>http://www.intalio.com/bpms/workflow/ib4p_20051115/skipTask</actionMapping>
+        </operation>
+	</service> -->
+	
+	<service name="UserBusinessProcessService">
+		<description></description>
+		<parameter name="ServiceClass">com.intalio.bpms.taskmanager.UserBusinessProcess</parameter>
+		<parameter name="LoadOnStartup">true</parameter>
+		<parameter name="useOriginalwsdl">true</parameter>
+		<parameter name="modifyUserWSDLPortAddress">true</parameter>     
+		<operation name="escalateTask" mep="http://www.w3.org/ns/wsdl/in-out" namespace="http://www.intalio.com/bpms/workflow/ib4p_20051115">
+            <messageReceiver class="org.apache.axis2.receivers.RawXMLINOutMessageReceiver"/>
+            <actionMapping>escalateTask</actionMapping>
+            <outputActionMapping>http://www.intalio.com/bpms/workflow/ib4p_20051115/UserBusinessProcessPortType/escalateTaskResponse</outputActionMapping>
+        </operation>
+        <!-- <operation name="createTask">
+            <messageReceiver class="org.apache.axis2.receivers.RawXMLINOutMessageReceiver"/>
+            <actionMapping>http://www.intalio.com/bpms/workflow/ib4p_20051115/createTask</actionMapping>
+        </operation>
+        <operation name="skipTask">
+            <messageReceiver class="org.apache.axis2.receivers.RawXMLINOutMessageReceiver"/>
+            <actionMapping>http://www.intalio.com/bpms/workflow/ib4p_20051115/skipTask</actionMapping>
+        </operation> -->
+	</service>
+</serviceGroup>

@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions targetNamespace="http://www.intalio.com/bpms/workflow/ib4p_20051115" xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:plnk="http://schemas.xmlsoap.org/ws/2004/03/partner-link/" xmlns:tms="http://www.intalio.com/BPMS/Workflow/TaskManagementServices-20051109/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:bpws="http://schemas.xmlsoap.org/ws/2004/03/business-process/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:b4p="http://www.intalio.com/bpms/workflow/ib4p_20051115">
+  <types>
+    <xsd:schema targetNamespace="http://www.intalio.com/bpms/workflow/ib4p_20051115">
+			<xsd:include schemaLocation="b4p.xsd"/>
+		</xsd:schema>
+  </types>
+  <message name="notifyTaskCompletionResponse">
+    <part name="root" element="b4p:response">
+    </part>
+  </message>
+  <message name="skipTaskResponse">
+    <part name="root" element="b4p:response">
+    </part>
+  </message>
+  <message name="revokeTaskRequest">
+    <part name="root" element="b4p:revokeTaskRequest">
+    </part>
+  </message>
+  <message name="revokeTaskResponse">
+    <part name="root" element="b4p:revokeTaskResponse">
+    </part>
+  </message>
+  <message name="completeTaskRequest">
+    <part name="root" element="b4p:completeTaskRequest">
+    </part>
+  </message>
+  <message name="nextTaskReady">
+    <part name="root" element="b4p:chainedExecution">
+    </part>
+  </message>
+  <message name="claimTaskResponse">
+    <part name="root" element="b4p:claimTaskResponse">
+    </part>
+  </message>
+  <message name="createTaskResponse">
+    <part name="root" element="b4p:response">
+    </part>
+  </message>
+  <message name="usersAndRoles">
+    <part name="root" element="b4p:usersAndRoles">
+    </part>
+  </message>
+  <message name="skipTaskRequest">
+    <part name="root" element="b4p:skipTaskRequest">
+    </part>
+  </message>
+  <message name="completeTaskResponse">
+    <part name="root" element="b4p:response">
+    </part>
+  </message>
+  <message name="escalateTaskResponse">
+    <part name="root" element="b4p:escalateTaskResponse">
+    </part>
+  </message>
+  <message name="escalateTaskRequest">
+    <part name="root" element="b4p:escalateTaskRequest">
+    </part>
+  </message>
+  <message name="claimTaskRequest">
+    <part name="root" element="b4p:claimTaskRequest">
+    </part>
+  </message>
+  <message name="createTaskRequest">
+    <part name="root" element="b4p:createTaskRequest">
+    </part>
+  </message>
+  <message name="notifyTaskCompletionRequest">
+    <part name="root" element="b4p:notifyTaskCompletionRequest">
+    </part>
+  </message>
+  <portType name="UIFWPortType">
+    <operation name="completeTask">
+      <input name="completeTaskRequest" message="b4p:completeTaskRequest">
+    </input>
+      <output name="completeTaskResponse" message="b4p:completeTaskResponse">
+    </output>
+    </operation>
+    <operation name="skipTask">
+      <input name="skipTaskRequest" message="b4p:skipTaskRequest">
+    </input>
+      <output name="skipTaskResponse" message="b4p:skipTaskResponse">
+    </output>
+    </operation>
+    <operation name="claimTask">
+      <input name="claimTaskRequest" message="b4p:claimTaskRequest">
+    </input>
+      <output name="claimTaskResponse" message="b4p:claimTaskResponse">
+    </output>
+    </operation>
+    <operation name="revokeTask">
+      <input name="revokeTaskRequest" message="b4p:revokeTaskRequest">
+    </input>
+      <output name="revokeTaskResponse" message="b4p:revokeTaskResponse">
+    </output>
+    </operation>
+  </portType>
+  <portType name="UserBusinessProcessPortType">
+    <operation name="createTask">
+      <input name="createTaskRequest" message="b4p:createTaskRequest">
+    </input>
+      <output name="createTaskResponse" message="b4p:createTaskResponse">
+    </output>
+    </operation>
+    <operation name="escalateTask">
+      <input name="escalateTaskRequest" message="b4p:escalateTaskRequest">
+    </input>
+      <output name="escalateTaskResponse" message="b4p:escalateTaskResponse">
+    </output>
+    </operation>
+    <operation name="skipTask">
+      <input name="skipTaskRequest" message="b4p:skipTaskRequest">
+    </input>
+      <output name="skipTaskResponse" message="b4p:skipTaskResponse">
+    </output>
+    </operation>
+  </portType>
+  <portType name="TMPPortType">
+    <operation name="nextTaskReady">
+      <input name="nextTaskReady" message="b4p:nextTaskReady">
+    </input>
+    </operation>
+  </portType>
+  <binding name="UserBusinessProcessBinding" type="b4p:UserBusinessProcessPortType">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <operation name="createTask">
+      <soap:operation soapAction="createTask" style="document"/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+    </operation>
+    <operation name="escalateTask">
+      <soap:operation soapAction="escalateTask" style="document"/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+    </operation>
+    <operation name="skipTask">
+      <soap:operation soapAction="skipTask" style="document"/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+    </operation>
+  </binding>
+  <binding name="UIFWBinding" type="b4p:UIFWPortType">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <operation name="completeTask">
+      <soap:operation soapAction="completeTask" style="document"/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+    </operation>
+    <operation name="claimTask">
+      <soap:operation soapAction="claimTask" style="document"/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+    </operation>
+    <operation name="revokeTask">
+      <soap:operation soapAction="revokeTask" style="document"/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+    </operation>
+    <operation name="skipTask">
+      <soap:operation soapAction="skipTask" style="document"/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+    </operation>
+  </binding>
+  <binding name="TMPBinding" type="b4p:TMPPortType">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <operation name="nextTaskReady">
+      <soap:operation soapAction="nextTaskReady" style="document"/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+    </operation>
+  </binding>
+  <service name="UserBusinessProcessService">
+    <port name="UserBusinessProcessPort" binding="b4p:UserBusinessProcessBinding">
+      <soap:address location="http://localhost:8080/ode/processes/workflow/ib4p"/>
+    </port>
+  </service>
+    <bpws:property name="taskId" type="xsd:string"/>
+    <bpws:property name="processId" type="xsd:string"/>
+    <bpws:propertyAlias messageType="b4p:createTaskResponse" part="root" propertyName="b4p:taskId">
+
+		<bpws:query>//b4p:taskMetaData/b4p:taskId</bpws:query>
+
+	</bpws:propertyAlias>
+    <bpws:propertyAlias messageType="b4p:escalateTaskRequest" part="root" propertyName="b4p:taskId">
+
+		<bpws:query>//b4p:taskId</bpws:query>
+
+	</bpws:propertyAlias>
+    <bpws:propertyAlias messageType="b4p:claimTaskRequest" part="root" propertyName="b4p:taskId">
+
+		<bpws:query>//b4p:taskId</bpws:query>
+
+	</bpws:propertyAlias>
+    <bpws:propertyAlias messageType="b4p:revokeTaskRequest" part="root" propertyName="b4p:taskId">
+
+		<bpws:query>//b4p:taskId</bpws:query>
+
+	</bpws:propertyAlias>
+    <bpws:propertyAlias messageType="b4p:completeTaskRequest" part="root" propertyName="b4p:taskId">
+
+		<bpws:query>//b4p:taskMetaData/b4p:taskId</bpws:query>
+
+	</bpws:propertyAlias>
+    <bpws:propertyAlias messageType="b4p:notifyTaskCompletionRequest" part="root" propertyName="b4p:taskId">
+
+		<bpws:query>//b4p:taskMetaData/b4p:taskId</bpws:query>
+
+	</bpws:propertyAlias>
+    <bpws:propertyAlias messageType="b4p:nextTaskReady" part="root" propertyName="b4p:taskId">
+
+		<bpws:query>//b4p:previousTaskId</bpws:query>
+
+	</bpws:propertyAlias>
+    <bpws:propertyAlias messageType="b4p:createTaskRequest" part="root" propertyName="b4p:processId">
+
+		<bpws:query>//b4p:taskMetaData/b4p:processId</bpws:query>
+
+	</bpws:propertyAlias>
+    <bpws:propertyAlias messageType="b4p:createTaskResponse" part="root" propertyName="b4p:processId">
+
+		<bpws:query>//b4p:taskMetaData/b4p:processId</bpws:query>
+
+	</bpws:propertyAlias>
+    <bpws:propertyAlias messageType="b4p:notifyTaskCompletionRequest" part="root" propertyName="b4p:processId">
+
+		<bpws:query>//b4p:taskMetaData/b4p:processId</bpws:query>
+
+	</bpws:propertyAlias>
+</definitions>
