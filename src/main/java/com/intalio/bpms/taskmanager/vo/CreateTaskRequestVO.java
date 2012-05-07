@@ -4,7 +4,7 @@ public class CreateTaskRequestVO {
 	
 	private TaskMetaDataTypeVO taskMetaData;
 	private String participantToken;
-	private String taskInput;
+	private String taskInput;  //TODO:What should be the type of taskInput, as no type is given in xsd:type
 	
 	public CreateTaskRequestVO() {
 		super();

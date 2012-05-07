@@ -34,7 +34,7 @@ public class TaskMetaDataTypeVO {
 	private String nextTaskId;
 	private String session;
 	private String nextTaskURL;
-	private List<AttachmentVO> attachments;
+	private AttachmentVO attachments;  //TODO:What should be the type of attachments, as no type is given in xsd:type
 	
 	public TaskMetaDataTypeVO() {
 		super();
@@ -52,7 +52,7 @@ public class TaskMetaDataTypeVO {
 			String userProcessEndpoint, String userProcessNamespaceURI,
 			String userProcessCompleteSOAPAction, boolean isChainedBefore,
 			String previousTaskId, String nextTaskId, String session,
-			String nextTaskURL, List<AttachmentVO> attachments) {
+			String nextTaskURL, AttachmentVO attachments) {
 		super();
 		this.taskId = taskId;
 		this.taskState = taskState;
@@ -319,11 +319,11 @@ public class TaskMetaDataTypeVO {
 		this.nextTaskURL = nextTaskURL;
 	}
 
-	public List<AttachmentVO> getAttachments() {
+	public AttachmentVO getAttachments() {
 		return attachments;
 	}
 
-	public void setAttachments(List<AttachmentVO> attachments) {
+	public void setAttachments(AttachmentVO attachments) {
 		this.attachments = attachments;
 	}
 

@@ -5,7 +5,7 @@ public class CompleteTaskRequestVO {
 	private TaskMetaDataTypeVO taskMetaData;
 	private String participantToken;
 	private String user;
-	private String taskOutput;
+	private String taskOutput; //TODO:What should be the type of taskOutput, as no type is given in xsd:type
 	
 	public CompleteTaskRequestVO() {
 		super();
