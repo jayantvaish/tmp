@@ -12,28 +12,32 @@
         </operation>       
 	</service>
 
-	<!-- <service name="UIFWService">
+	<service name="UIFWService">
 		<description></description>
-		<parameter name="ServiceClass">com.intalio.bpms.tmpservice.UIFWServiceSkeleton</parameter>
+		<parameter name="ServiceClass">com.intalio.bpms.taskmanager.UIFW</parameter>
 		<parameter name="LoadOnStartup">true</parameter>
 		<parameter name="useOriginalwsdl">true</parameter>
-		<operation name="claimTask">
+		<operation name="revokeTask" mep="http://www.w3.org/ns/wsdl/in-out" namespace="http://www.intalio.com/bpms/workflow/ib4p_20051115">
             <messageReceiver class="org.apache.axis2.receivers.RawXMLINOutMessageReceiver"/>
-            <actionMapping>http://www.intalio.com/bpms/workflow/ib4p_20051115/claimTask</actionMapping>
+            <actionMapping>revokeTask</actionMapping>
+            <outputActionMapping>http://www.intalio.com/bpms/workflow/ib4p_20051115/UIFWPortType/revokeTaskResponse</outputActionMapping>
         </operation>
-        <operation name="completeTask">
+        <operation name="completeTask" mep="http://www.w3.org/ns/wsdl/in-out" namespace="http://www.intalio.com/bpms/workflow/ib4p_20051115">
             <messageReceiver class="org.apache.axis2.receivers.RawXMLINOutMessageReceiver"/>
-            <actionMapping>http://www.intalio.com/bpms/workflow/ib4p_20051115/completeTask</actionMapping>
+            <actionMapping>completeTask</actionMapping>
+            <outputActionMapping>http://www.intalio.com/bpms/workflow/ib4p_20051115/UIFWPortType/completeTaskResponse</outputActionMapping>
         </operation>
-        <operation name="revokeTask">
+        <operation name="claimTask" mep="http://www.w3.org/ns/wsdl/in-out" namespace="http://www.intalio.com/bpms/workflow/ib4p_20051115">
             <messageReceiver class="org.apache.axis2.receivers.RawXMLINOutMessageReceiver"/>
-            <actionMapping>http://www.intalio.com/bpms/workflow/ib4p_20051115/revokeTask</actionMapping>
+            <actionMapping>claimTask</actionMapping>
+            <outputActionMapping>http://www.intalio.com/bpms/workflow/ib4p_20051115/UIFWPortType/claimTaskResponse</outputActionMapping>
         </operation>
-        <operation name="skipTask">
+        <operation name="skipTask" mep="http://www.w3.org/ns/wsdl/in-out" namespace="http://www.intalio.com/bpms/workflow/ib4p_20051115">
             <messageReceiver class="org.apache.axis2.receivers.RawXMLINOutMessageReceiver"/>
-            <actionMapping>http://www.intalio.com/bpms/workflow/ib4p_20051115/skipTask</actionMapping>
+            <actionMapping>skipTask</actionMapping>
+            <outputActionMapping>http://www.intalio.com/bpms/workflow/ib4p_20051115/UIFWPortType/skipTaskResponse</outputActionMapping>
         </operation>
-	</service> -->
+	</service>
 	
 	<service name="UserBusinessProcessService">
 		<description></description>
@@ -46,13 +50,15 @@
             <actionMapping>escalateTask</actionMapping>
             <outputActionMapping>http://www.intalio.com/bpms/workflow/ib4p_20051115/UserBusinessProcessPortType/escalateTaskResponse</outputActionMapping>
         </operation>
-        <!-- <operation name="createTask">
+        <operation name="createTask">
             <messageReceiver class="org.apache.axis2.receivers.RawXMLINOutMessageReceiver"/>
-            <actionMapping>http://www.intalio.com/bpms/workflow/ib4p_20051115/createTask</actionMapping>
+            <actionMapping>createTask</actionMapping>
+            <outputActionMapping>http://www.intalio.com/bpms/workflow/ib4p_20051115/UserBusinessProcessPortType/createTaskResponse</outputActionMapping>
         </operation>
-        <operation name="skipTask">
+        <operation name="skipTask" mep="http://www.w3.org/ns/wsdl/in-out" namespace="http://www.intalio.com/bpms/workflow/ib4p_20051115">
             <messageReceiver class="org.apache.axis2.receivers.RawXMLINOutMessageReceiver"/>
-            <actionMapping>http://www.intalio.com/bpms/workflow/ib4p_20051115/skipTask</actionMapping>
-        </operation> -->
+            <actionMapping>createTask</actionMapping>
+            <outputActionMapping>http://www.intalio.com/bpms/workflow/ib4p_20051115/UserBusinessProcessPortType/createTaskResponse</outputActionMapping>
+        </operation>
 	</service>
 </serviceGroup>

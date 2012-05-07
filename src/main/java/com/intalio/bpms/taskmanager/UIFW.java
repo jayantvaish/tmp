@@ -3,49 +3,57 @@ package com.intalio.bpms.taskmanager;
 import org.apache.axiom.om.OMAbstractFactory;
 import org.apache.axiom.om.OMElement;
 import org.apache.axiom.om.OMFactory;
-import org.apache.axis2.databinding.ADBException;
 import org.intalio.tempo.workflow.util.xml.OMElementQueue;
 import org.intalio.tempo.workflow.util.xml.OMUnmarshaller;
 
 import com.intalio.bpms.taskmanager.common.TMPXMLConstants;
-import com.intalio.bpms.taskmanager.vo.EscalateTaskRequestVO;
+import com.intalio.bpms.taskmanager.vo.ClaimTaskRequestVO;
+import com.intalio.bpms.taskmanager.vo.RevokeTaskRequestVO;
 import com.intalio.bpms.taskmanager.vo.SkipTaskRequestVO;
 
-public class UserBusinessProcess extends OMUnmarshaller {
-
+public class UIFW extends OMUnmarshaller {
+	
 	private static final OMFactory OM_FACTORY = OMAbstractFactory.getOMFactory();
 	
-	public EscalateTaskRequestVO _escalateTaskRequest;
 	public SkipTaskRequestVO _skipTaskRequest;
-
-	public UserBusinessProcess() {
+	public RevokeTaskRequestVO _revokeTaskRequest;
+	public ClaimTaskRequestVO _claimTaskRequest;
+	
+	public UIFW() {
 		super(TMPXMLConstants.TMP_NAMESPACE, TMPXMLConstants.TMP_NAMESPACE_PREFIX);
-	}
+	}	
 
-	public OMElement escalateTask(OMElement requestElement) {
+	public OMElement revokeTask(OMElement requestElement) {
 		System.out.println(">>> Request received...");
-
+		
 		OMElementQueue rootQueue = new OMElementQueue(requestElement);
 		String taskId = requireElementValue(rootQueue, "taskId");
-		String userOwner = requireElementValue(rootQueue, "userOwner");
-		String roleOwner = requireElementValue(rootQueue, "roleOwner");
-		_escalateTaskRequest = new EscalateTaskRequestVO(taskId, userOwner, roleOwner);
-
-		System.out.println("taskId: " + _escalateTaskRequest.getTaskId());
-		System.out.println("userOwner: " + _escalateTaskRequest.getUserOwner());
-		System.out.println("roleOwner: " + _escalateTaskRequest.getRoleOwner());
-
-		// Now doing some test by sending response back (it is just an example, how our ws will work.).
-		OMElement response = OM_FACTORY.createOMElement("status", OM_FACTORY.createOMNamespace(TMPXMLConstants.TMP_NAMESPACE, TMPXMLConstants.TMP_NAMESPACE_PREFIX));
-		response.addChild(OM_FACTORY.createOMText("Request send ok."));
-		//If we want to send any object as a response then we may need to create it's xmlObject.
+		String participantToken = requireElementValue(rootQueue, "participantToken");
+		_revokeTaskRequest = new RevokeTaskRequestVO(taskId, participantToken);
 		
-		return response;
+		System.out.println("taskId: " + _revokeTaskRequest.getTaskId());
+		System.out.println("participantToken: " + _revokeTaskRequest.getParticipantToken());
+		
+		return null;
 	}
-	
-	
 
-	public OMElement createTask(OMElement requestElement) {
+	public OMElement claimTask(OMElement requestElement) {
+		System.out.println(">>> Request received...");
+		
+		OMElementQueue rootQueue = new OMElementQueue(requestElement);
+		String taskId = requireElementValue(rootQueue, "taskId");
+		String claimerUser = requireElementValue(rootQueue, "claimerUser");
+		String participantToken = requireElementValue(rootQueue, "participantToken");
+		_claimTaskRequest = new ClaimTaskRequestVO(taskId, claimerUser, participantToken);
+		
+		System.out.println("taskId: " + _claimTaskRequest.getTaskId());
+		System.out.println("claimerUser: " + _claimTaskRequest.getClaimerUser());
+		System.out.println("participantToken: " + _claimTaskRequest.getParticipantToken());
+		
+		return null;
+	}
+
+	public OMElement completeTask(OMElement requestElement) {
 		System.out.println(">>> Request received...");
 		// TODO: Now here we will unmarshall the request.
 		return null;
