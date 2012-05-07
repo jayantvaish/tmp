@@ -5,6 +5,10 @@ public class ClaimTaskRequestVO {
 	private String claimerUser;
 	private String participantToken;
 	
+	public ClaimTaskRequestVO() {
+		super();
+	}
+
 	public ClaimTaskRequestVO(String taskId, String claimerUser,
 			String participantToken) {
 		super();

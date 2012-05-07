@@ -4,6 +4,10 @@ public class RevokeTaskRequestVO {
 	private String taskId;
 	private String participantToken;
 	
+	public RevokeTaskRequestVO() {
+		super();
+	}
+
 	public RevokeTaskRequestVO(String taskId, String participantToken) {
 		super();
 		this.taskId = taskId;

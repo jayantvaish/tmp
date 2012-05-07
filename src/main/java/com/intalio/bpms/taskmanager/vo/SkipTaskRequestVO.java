@@ -4,6 +4,10 @@ public class SkipTaskRequestVO {
 	private String taskId;
 	private String participantToken;	
 	
+	public SkipTaskRequestVO() {
+		super();
+	}
+
 	public SkipTaskRequestVO(String taskId, String participantToken) {
 		super();
 		this.taskId = taskId;

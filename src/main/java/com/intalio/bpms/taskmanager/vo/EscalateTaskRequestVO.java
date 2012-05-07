@@ -6,6 +6,10 @@ public class EscalateTaskRequestVO {
 	private String userOwner;
 	private String roleOwner;	
 	
+	public EscalateTaskRequestVO() {
+		super();
+	}
+
 	public EscalateTaskRequestVO(String taskId, String userOwner,
 			String roleOwner) {
 		super();

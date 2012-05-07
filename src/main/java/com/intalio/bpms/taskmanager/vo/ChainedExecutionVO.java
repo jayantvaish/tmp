@@ -3,8 +3,12 @@ package com.intalio.bpms.taskmanager.vo;
 public class ChainedExecutionVO{
 	private String previousTaskId;
 	private String nextTaskId;
-	private String nextTaskURL;	
+	private String nextTaskURL;
 	
+	public ChainedExecutionVO() {
+		super();
+	}
+
 	public ChainedExecutionVO(String previousTaskId, String nextTaskId,
 			String nextTaskURL) {
 		super();
