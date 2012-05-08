@@ -1,5 +1,7 @@
 package com.intalio.bpms.taskmanager;
 
+import java.util.Calendar;
+
 import org.apache.axiom.om.OMAbstractFactory;
 import org.apache.axiom.om.OMElement;
 import org.apache.axiom.om.OMFactory;
@@ -24,9 +26,11 @@ public class UserBusinessProcess extends OMUnmarshaller {
 	public EscalateTaskRequestVO _escalateTaskRequest;
 	public SkipTaskRequestVO _skipTaskRequest;
 	public CreateTaskRequestVO _createTaskRequest;
+	public TaskManager _taskManager;
 
 	public UserBusinessProcess() {
 		super(TMPXMLConstants.TMP_NAMESPACE, TMPXMLConstants.TMP_NAMESPACE_PREFIX);
+		_taskManager = new TaskManager();
 	}
 
 	public OMElement escalateTask(OMElement requestElement) {
@@ -69,6 +73,10 @@ public class UserBusinessProcess extends OMUnmarshaller {
 		_createTaskRequest = new CreateTaskRequestVO(taskMetaData, participantToken, taskInput);
 		System.out.println(">>> _createTaskRequest: " + _createTaskRequest);
 		//TODO: Insert logic here.
+		
+		//creating the tms task //TODO: this is test code, clean it.
+		Calendar creationDate = Calendar.getInstance();
+		_taskManager.createTMSTask(_createTaskRequest, creationDate);
 		
 		
 		//TODO: Marshall the response and return.		

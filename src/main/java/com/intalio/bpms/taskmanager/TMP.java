@@ -22,9 +22,14 @@ public class TMP extends OMUnmarshaller {
     	String nextTaskURL = requireElementValue(rootQueue, "nextTaskURL");
     	_chainedExecution = new ChainedExecutionVO(previousTaskId, nextTaskId, nextTaskURL);
     	
-    	System.out.println("previousTaskId: " + _chainedExecution.getPreviousTaskId());
-    	System.out.println("nextTaskId: " + _chainedExecution.getNextTaskId());
-    	System.out.println("nextTaskURL: " + _chainedExecution.getNextTaskURL());
+    	System.out.println("_chainedExecution: " + _chainedExecution);
+    	//TODO: Insert logic here.
+    }
+    
+    //This method is for internal use and not for web-service.
+    public void nextTaskReady(ChainedExecutionVO chainedExecution) {    	
+    	this._chainedExecution = chainedExecution;    	
+    	System.out.println("_chainedExecution: " + _chainedExecution);
     	//TODO: Insert logic here.
     }
     
