@@ -65,8 +65,9 @@ public class UserBusinessProcess extends OMUnmarshaller {
 		OMElement taskElement = requireElement(rootQueue, "taskMetaData");
 		TaskMetaDataTypeVO taskMetaData = new TaskMetaDataUnmarshaller().unmarshallTask(taskElement);
 		String participantToken = requireElementValue(rootQueue, "participantToken");
-		String taskInput = requireElementValue(rootQueue, "taskInput");		
+		OMElement taskInput = requireElement(rootQueue, "taskInput").getFirstElement();		
 		_createTaskRequest = new CreateTaskRequestVO(taskMetaData, participantToken, taskInput);
+		System.out.println(">>> _createTaskRequest: " + _createTaskRequest);
 		//TODO: Insert logic here.
 		
 		

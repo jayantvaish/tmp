@@ -77,8 +77,8 @@ public class UIFW extends OMUnmarshaller {
 		TaskMetaDataTypeVO taskMetaData = new TaskMetaDataUnmarshaller().unmarshallTask(taskElement);
 		String participantToken = requireElementValue(rootQueue, "participantToken");
 		String user = requireElementValue(rootQueue, "user");
-		String taskInput = requireElementValue(rootQueue, "taskInput");		
-		_completeTaskRequest = new CompleteTaskRequestVO(taskMetaData, participantToken, user, taskInput);
+		OMElement taskOutput = requireElement(rootQueue, "taskOutput").getFirstElement();		
+		_completeTaskRequest = new CompleteTaskRequestVO(taskMetaData, participantToken, user, taskOutput);
 		//TODO: Insert logic here.
 		
 		

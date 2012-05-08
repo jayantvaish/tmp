@@ -1,17 +1,19 @@
 package com.intalio.bpms.taskmanager.vo;
 
+import org.apache.axiom.om.OMElement;
+
 public class CreateTaskRequestVO {
 	
 	private TaskMetaDataTypeVO taskMetaData;
 	private String participantToken;
-	private String taskInput;  //TODO:What should be the type of taskInput, as no type is given in xsd:type
+	private OMElement taskInput;  
 	
 	public CreateTaskRequestVO() {
 		super();
 	}
 
 	public CreateTaskRequestVO(TaskMetaDataTypeVO taskMetaData,
-			String participantToken, String taskInput) {
+			String participantToken, OMElement taskInput) {
 		super();
 		this.taskMetaData = taskMetaData;
 		this.participantToken = participantToken;
@@ -34,11 +36,11 @@ public class CreateTaskRequestVO {
 		this.participantToken = participantToken;
 	}
 
-	public String getTaskInput() {
+	public OMElement getTaskInput() {
 		return taskInput;
 	}
 
-	public void setTaskInput(String taskInput) {
+	public void setTaskInput(OMElement taskInput) {
 		this.taskInput = taskInput;
 	}
 
