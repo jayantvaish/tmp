@@ -4,7 +4,9 @@ import org.apache.axiom.om.OMAbstractFactory;
 import org.apache.axiom.om.OMElement;
 import org.apache.axiom.om.OMFactory;
 import org.apache.axis2.databinding.ADBException;
+import org.intalio.tempo.workflow.task.xml.TaskXMLConstants;
 import org.intalio.tempo.workflow.util.xml.OMElementQueue;
+import org.intalio.tempo.workflow.util.xml.OMMarshaller;
 import org.intalio.tempo.workflow.util.xml.OMUnmarshaller;
 
 import com.intalio.bpms.taskmanager.common.TMPXMLConstants;
@@ -17,7 +19,7 @@ import com.intalio.bpms.taskmanager.vo.TaskMetaDataTypeVO;
 
 public class UserBusinessProcess extends OMUnmarshaller {
 
-	private static final OMFactory OM_FACTORY = OMAbstractFactory.getOMFactory();
+	//private static final OMFactory OM_FACTORY = OMAbstractFactory.getOMFactory();
 	
 	public EscalateTaskRequestVO _escalateTaskRequest;
 	public SkipTaskRequestVO _skipTaskRequest;
@@ -90,5 +92,11 @@ public class UserBusinessProcess extends OMUnmarshaller {
 		//TODO: Marshall the response and return.
 		return null;
 	}
+	
+	private abstract class TMPResponseMarshaller extends OMMarshaller {
+        public TMPResponseMarshaller(OMFactory omFactory) {
+            super(omFactory, omFactory.createOMNamespace(TMPXMLConstants.TMP_NAMESPACE, TMPXMLConstants.TMP_NAMESPACE_PREFIX));
+        }
+    }
 
 }

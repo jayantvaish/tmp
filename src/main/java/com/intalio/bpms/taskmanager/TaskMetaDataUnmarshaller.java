@@ -4,8 +4,10 @@ package com.intalio.bpms.taskmanager;
 
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.Date;
 
 import org.apache.axiom.om.OMElement;
+import org.apache.axis2.databinding.types.Duration;
 import org.intalio.tempo.workflow.util.xml.OMElementQueue;
 import org.intalio.tempo.workflow.util.xml.OMUnmarshaller;
 
@@ -32,7 +34,11 @@ public class TaskMetaDataUnmarshaller extends OMUnmarshaller {
 		String description = requireElementValue(taskElementQueue, "description");
 		String processId = requireElementValue(taskElementQueue, "processId");
 		String instanceId = requireElementValue(taskElementQueue, "instanceId");
+		
 		String creationDateInString = requireElementValue(taskElementQueue, "creationDate"); //TODO:Convert this in Date.
+		System.out.println(">> creationDateInString: " + creationDateInString);
+		Date creationDate = null;
+		
 		String userOwner = requireElementValue(taskElementQueue, "userOwner");
 		String roleOwner = requireElementValue(taskElementQueue, "roleOwner");
 		
@@ -55,7 +61,7 @@ public class TaskMetaDataUnmarshaller extends OMUnmarshaller {
 		AccessControlTypeVO deferAction = unmarshallAccessControl(deferActionElement);
 		
 		String formUrlInString = requireElementValue(taskElementQueue, "formUrl"); 
-		URI formUrl;
+		URI formUrl = null;
 		try {
 			formUrl = new URI(formUrlInString);
 		} catch (URISyntaxException e) {
@@ -86,29 +92,47 @@ public class TaskMetaDataUnmarshaller extends OMUnmarshaller {
 		String nextTaskURL = requireElementValue(taskElementQueue, "nextTaskURL");
 		
 		OMElement attachmentsElement = requireElement(taskElementQueue, "attachments");
-		AttachmentVO attachments = unmarshallAttachment(attachmentsElement);
+		AttachmentVO attachments = unmarshallAttachments(attachmentsElement); 
 		
-		TaskMetaDataTypeVO taskMetaData = null; //TODO: initialize it.		
+		TaskMetaDataTypeVO taskMetaData = new TaskMetaDataTypeVO(taskId, taskState, taskType, 
+				description, processId, instanceId, creationDate, userOwner, roleOwner, 
+				claimAction, revokeAction, saveAction, dismissAction, completeAction, deferAction, 
+				formUrl, failureCode, failureReason, priority, scheduledActions, userEndpoint, 
+				userProcessEndpoint, userProcessNamespaceURI, userProcessCompleteSOAPAction, isChainedBefore, 
+				previousTaskId, nextTaskId, 
+				session, nextTaskURL, attachments); 
+		System.out.println(">>> taskMetaData: " + taskMetaData);
 		return taskMetaData;
+	}
+	
+	private AttachmentVO unmarshallAttachments(OMElement element){
+		OMElementQueue elementQueue = new OMElementQueue(element);
+		OMElement attachmentElement = expectElementAnyNS(elementQueue, "attachment");
+		AttachmentVO attachment = unmarshallAttachment(attachmentElement);
+		return attachment;
 	}
 	
 	private AttachmentVO unmarshallAttachment(OMElement element){
 		OMElementQueue elementQueue = new OMElementQueue(element);
-		OMElement attachmentElement = requireElement(elementQueue, "attachment");
-		AttachmentMetadataVO attachmentMetadata = unmarshallAttachmentMetadata(attachmentElement);
-		String payloadUrl = requireElementValue(elementQueue, "payloadUrl");
+		OMElement attachmentMetadataElement = expectElementAnyNS(elementQueue, "attachmentMetadata");
+		AttachmentMetadataVO attachmentMetadata = unmarshallAttachmentMetadata(attachmentMetadataElement);
+		String payloadUrl = expectElementValue(elementQueue, "payloadUrl");
 		AttachmentVO attachment = new AttachmentVO(attachmentMetadata, payloadUrl);
 		return attachment;
 	}
 	
 	private AttachmentMetadataVO unmarshallAttachmentMetadata(OMElement element){
 		OMElementQueue elementQueue = new OMElementQueue(element);
-		String mimeType = requireElementValue(elementQueue, "mimeType");
-		String fileName = requireElementValue(elementQueue, "fileName");
-		String title = requireElementValue(elementQueue, "title");
-		String description = requireElementValue(elementQueue, "role");
-		String creationDateInString = requireElementValue(elementQueue, "creationDate");//TODO: convert to java.util.Date
-		AttachmentMetadataVO attachmentMetadata = null; //TODO: Initialize it. 
+		String mimeType = expectElementValue(elementQueue, "mimeType");
+		String fileName = expectElementValue(elementQueue, "fileName");
+		String title = expectElementValue(elementQueue, "title");
+		String description = expectElementValue(elementQueue, "description");
+		
+		String creationDateInString = expectElementValue(elementQueue, "creationDate"); //TODO: convert to java.util.Date
+		Date creationDate = null; 
+		
+		AttachmentMetadataVO attachmentMetadata = new AttachmentMetadataVO(mimeType, fileName, 
+				title, description, creationDate); 
 		return attachmentMetadata;
 	}
 	
@@ -134,10 +158,12 @@ public class TaskMetaDataUnmarshaller extends OMUnmarshaller {
 	private ScheduledActionsDetailsVO unmarshallScheduledActionsDetails(OMElement element){
 		OMElementQueue elementQueue = new OMElementQueue(element);
 		String untilDateInString = requireElementValue(elementQueue, "until"); //TODO: convert to java.util.Date
-		
+		Date untilDate = null;
 		
 		String forDurationInString = requireElementValue(elementQueue, "for"); //TODO: convert to org.apache.axis2.databinding.types.Duration
-		ScheduledActionsDetailsVO scheduledActionsDetails = null; //TODO: Initialize it.
+		Duration forDuration = null;
+		
+		ScheduledActionsDetailsVO scheduledActionsDetails = new ScheduledActionsDetailsVO(untilDate, forDuration); 
 		return scheduledActionsDetails;
 	}
 

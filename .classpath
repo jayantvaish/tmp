@@ -70,5 +70,8 @@
 	<classpathentry kind="lib" path="/home/jayant/axis/axis2-1.6.1/lib/xmlbeans-2.3.0.jar"/>
 	<classpathentry kind="lib" path="/home/jayant/axis/axis2-1.6.1/lib/xml-resolver-1.2.jar"/>
 	<classpathentry kind="lib" path="/home/jayant/axis/axis2-1.6.1/lib/XmlSchema-1.4.7.jar"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/tempo-dao-nutsNbolts"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/tempo-tms-axis"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/tempo-tms-service"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
