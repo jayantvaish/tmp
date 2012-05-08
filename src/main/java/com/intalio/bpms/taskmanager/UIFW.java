@@ -10,7 +10,6 @@ import com.intalio.bpms.taskmanager.common.TMPXMLConstants;
 import com.intalio.bpms.taskmanager.vo.ClaimTaskRequestVO;
 import com.intalio.bpms.taskmanager.vo.ClaimTaskResponseVO;
 import com.intalio.bpms.taskmanager.vo.CompleteTaskRequestVO;
-import com.intalio.bpms.taskmanager.vo.CreateTaskRequestVO;
 import com.intalio.bpms.taskmanager.vo.ResponseVO;
 import com.intalio.bpms.taskmanager.vo.RevokeTaskRequestVO;
 import com.intalio.bpms.taskmanager.vo.RevokeTaskResponseVO;
@@ -44,8 +43,15 @@ public class UIFW extends OMUnmarshaller {
 		//TODO: Insert logic here.
 		
 		
-		//TODO: Marshall the revokeTaskResponse and return.
-		return null;
+		//TODO: Marshall the escalateTaskResponse and return (Check the output on implementaion).	
+		OMElement response = new TMPResponseMarshaller(OM_FACTORY) {
+            public OMElement marshalResponse(RevokeTaskResponseVO revokeTaskResponse) {
+                OMElement response = createElement("status");
+                response.addChild(OM_FACTORY.createOMText(revokeTaskResponse.getStatus()));
+                return response;
+            }
+        }.marshalResponse(revokeTaskResponse);
+		return response;
 	}
 
 	public OMElement claimTask(OMElement requestElement) {
@@ -64,8 +70,15 @@ public class UIFW extends OMUnmarshaller {
 		//TODO: Insert logic here.
 		
 		
-		//TODO: Marshall the claimTaskResponse and return.
-		return null;
+		//TODO: Marshall the escalateTaskResponse and return (Check the output on implementaion).	
+		OMElement response = new TMPResponseMarshaller(OM_FACTORY) {
+            public OMElement marshalResponse(ClaimTaskResponseVO claimTaskResponse) {
+                OMElement response = createElement("status");
+                response.addChild(OM_FACTORY.createOMText(claimTaskResponse.getStatus()));
+                return response;
+            }
+        }.marshalResponse(claimTaskResponse);
+		return response;
 	}
 
 	public OMElement completeTask(OMElement requestElement) {

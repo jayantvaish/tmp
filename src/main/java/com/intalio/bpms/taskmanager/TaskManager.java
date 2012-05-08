@@ -4,12 +4,11 @@ import java.util.Calendar;
 import java.util.Date;
 
 import org.apache.axiom.om.OMElement;
-import org.apache.axis2.databinding.ADBException;
 import org.intalio.tempo.workflow.task.PATask;
 import org.intalio.tempo.workflow.tms.TMSException;
 import org.intalio.tempo.workflow.tms.server.ITMSServer;
 import org.intalio.tempo.workflow.tms.server.dao.ITaskDAOConnection;
-import org.w3c.dom.Document;
+import org.intalio.tempo.workflow.tms.server.dao.ITaskDAOConnectionFactory;
 
 import com.intalio.bpms.taskmanager.converter.Convertor;
 import com.intalio.bpms.taskmanager.vo.ChainedExecutionVO;
@@ -22,42 +21,7 @@ public class TaskManager {
 	private ITMSServer _tmsServer;
     private ResponseVO _createTaskResponse;
     private ITaskDAOConnection dao;
-    
-    
-	
-	public ITMSServer get_tmsServer() {
-		return _tmsServer;
-	}
-
-
-
-	public void set_tmsServer(ITMSServer _tmsServer) {
-		this._tmsServer = _tmsServer;
-	}
-
-
-
-	public ResponseVO get_createTaskResponse() {
-		return _createTaskResponse;
-	}
-
-
-
-	public void set_createTaskResponse(ResponseVO _createTaskResponse) {
-		this._createTaskResponse = _createTaskResponse;
-	}
-
-
-
-	public ITaskDAOConnection getDao() {
-		return dao;
-	}
-
-
-
-	public void setDao(ITaskDAOConnection dao) {
-		this.dao = dao;
-	}
+    private ITaskDAOConnectionFactory _taskDAOFactory; //How we'll get the factory.
 
 
 
