@@ -36,7 +36,7 @@ public class Convertor {
         PATask task = null;
         String taskId = taskMetaDataType.getTaskId();
         String taskStateString = null;
-        if(taskMetaDataType.getTaskState() != null)
+        if(taskMetaDataType.getTaskState() != null && !taskMetaDataType.getTaskState().equals(""))
             taskStateString = taskMetaDataType.getTaskState().toString();
         else
             taskStateString = TaskState.READY.toString();
@@ -87,6 +87,8 @@ public class Convertor {
             task.setFailureCode(failureCode);
             task.setFailureReason(failureReason == null ? "" : failureReason);
         } else {
+        	if(failureCode.equals("")) failureCode = null;
+        	if(failureReason.equals("")) failureReason = null;
             throwExcptionIfNotNull(failureCode, "failure code");
             throwExcptionIfNotNull(failureReason, "failure reason");
         }
@@ -124,21 +126,15 @@ public class Convertor {
         }
         
         if (isChainedBefore) {
-            if (isChainedBefore){
-                if (previousTaskId == null) {
-                    throw new InvalidInputFormatException("tms:previousTaskId is required " + "if tms:isChainedBefore is true");
-                }
-                task.setPreviousTaskID(previousTaskId);
-                task.setChainedBefore(true);
-             }
-             else { //Will it reach here??
-                if ((previousTaskId != null) && (!"".equals(previousTaskId))) {
-                    throw new InvalidInputFormatException("tms:previousTaskId must be empty or not present " + "if tms:isChainedBefore is false");
-                }
+            if (previousTaskId == null) {
+                throw new InvalidInputFormatException("tms:previousTaskId is required " + "if tms:isChainedBefore is true");
             }
-        } else {
-            if (previousTaskId != null)
-                throw new InvalidInputFormatException("tms:isChainedBefore is required " + "if tms:previousTaskId is present");
+            task.setPreviousTaskID(previousTaskId);
+            task.setChainedBefore(true);             
+        } else { 
+            if ((previousTaskId != null) && (!"".equals(previousTaskId))) {
+                throw new InvalidInputFormatException("tms:previousTaskId must be empty or not present " + "if tms:isChainedBefore is false");
+            }
         }
         
         if(taskMetaDataType.getScheduledActions() !=null){
@@ -174,7 +170,7 @@ public class Convertor {
     private String getText(OMElement next) {
         Iterator<OMElement> childElements = next.getChildElements();
         
-        while(!childElements.hasNext()){
+        while(childElements.hasNext()){
             return childElements.next().getText();
         }
         return next.getText();
@@ -228,7 +224,8 @@ public class Convertor {
     
     public void throwExcptionIfNotNull(Object parameter, String name)
             throws InvalidInputFormatException {
-        if (parameter != null) {
+    	//Throw exception if parameter is not null. 
+        if (parameter != null ) {
             throw new InvalidInputFormatException(
                     "Required parameter was not specified: " + name);
         }     

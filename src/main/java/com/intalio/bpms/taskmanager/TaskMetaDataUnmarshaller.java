@@ -73,7 +73,10 @@ public class TaskMetaDataUnmarshaller extends OMUnmarshaller {
 		String failureReason = requireElementValue(taskElementQueue, "failureReason");
 		
 		String priorityInString = requireElementValue(taskElementQueue, "priority"); 
-		int priority = Integer.parseInt(priorityInString);
+		int priority = 0;
+		if(!(priorityInString == null || priorityInString.equals(""))){
+			priority = Integer.parseInt(priorityInString);
+		}		
 		
 		OMElement scheduledActionsElement = requireElement(taskElementQueue, "scheduledActions");
 		ScheduledActionsVO scheduledActions = unmarshallScheduledActions(scheduledActionsElement);
